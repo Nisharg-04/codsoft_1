@@ -1,22 +1,21 @@
-name: Commnet on Issue
+name: Comment on Issue
 
 on:
   issues:
-   types: [opened]
+    types: [opened, edited]
 
 jobs:
   comment:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
     steps:
-      - name: Create comment
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Create or Update Comment
         uses: peter-evans/create-or-update-comment@v4
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
-            This is a multi-line test comment
-            - With GitHub **Markdown** :sparkles:
-            - Created by [create-or-update-comment][1]
-
-            [1]: https://github.com/peter-evans/create-or-update-comment
-          reactions: '+1'
-  
+            Thank you for opening this issue!
