@@ -1,0 +1,27 @@
+name: hello_world
+
+on: 
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+
+jobs:
+  hello:
+    runs_on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: hello world
+        run: echo "Hello World"
+        shell: bash
+
+  goodbye:
+    runs_on: ubuntu-latest
+    steps:
+      - name: hello_world
+        run: echo "bye"
+        shell: bash
